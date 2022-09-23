@@ -58,7 +58,7 @@ footer {
 .rightFooter > h4 {
   font-family: "Roboto";
   font-size: 1.4vmax;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 .rightFooter > a {
   text-decoration: none;
@@ -73,5 +73,8 @@ footer {
   color: #a95534;
 }
 .instagramSvgIcon {
-  color: rgb(144, 81, 202);
+  color: white;
+}
+.facebookSvgIcon {
+  color: white;
 }

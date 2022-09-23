@@ -2,6 +2,7 @@ import React from "react";
 import playStore from "../../../images/playstore.png";
 import appStore from "../../../images/Appstore.png";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import FacebookIcon from "@material-ui/icons/Facebook";
 import "./Footer.css";
 
 const Footer = () => {
@@ -15,7 +16,7 @@ const Footer = () => {
       </div>
 
       <div className="midFooter">
-        <h2>Tehzeeb Wooden Crafts</h2>
+        <h2>TEHZEEB WOODEN CRAFTS</h2>
         <p>High Quality is our first priority</p>
 
         <p>Copyrights 2022 &copy;T.W.C </p>
@@ -26,7 +27,9 @@ const Footer = () => {
         <a href="https://www.instagram.com/tehzeebwoodencraft">
           <InstagramIcon className="instagramSvgIcon" />
         </a>
-        <a href="https://www.facebook.com/tehzeebwoodencraft">Facebook</a>
+        <a href="https://www.facebook.com/tehzeebwoodencraft">
+          <FacebookIcon className="facebookSvgIcon" />
+        </a>
       </div>
     </footer>
   );

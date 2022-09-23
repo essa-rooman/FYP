@@ -82,11 +82,11 @@
 }
 
 .youtubeSvgIcon {
-  color: #a95534;
+  color: rgb(61, 129, 207);
 }
 
 .instagramSvgIcon {
-  color: rgb(144, 81, 202);
+  color: rgb(168, 81, 202);
 }
 
 @media screen and (max-width: 600px) {

@@ -3,6 +3,8 @@ import "./aboutSection.css";
 import { Button, Typography, Avatar } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import FacebookIcon from "@material-ui/icons/Facebook";
+
 const About = () => {
   const visitInstagram = () => {
     window.location = "https://www.instagram.com/tehzeebwoodencraft";
@@ -18,7 +20,7 @@ const About = () => {
           <div>
             <Avatar
               style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
-              src="https://res.cloudinary.com/tripleayt/image/upload/v1631555947/products/jpyibarlaxawvcvqjv5b.png"
+              src="../../images/logo1.jpg"
               alt="Founder"
             />
             <Typography>Tehzeeb Wooden Craft</Typography>
@@ -33,7 +35,7 @@ const About = () => {
               href="https://www.facebook.com/tehzeebwoodencraft"
               target="blank"
             >
-              <YouTubeIcon className="youtubeSvgIcon" />
+              <FacebookIcon className="youtubeSvgIcon" />
             </a>
 
             <a

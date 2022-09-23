@@ -5,14 +5,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(231, 231, 231);
+  background-image: url("../../images/loginpage.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   position: fixed;
   top: 0%;
   left: 0;
 }
 
 .LoginSignUpBox {
-  background-color: white;
+  background-color: rgba(245, 239, 239, 0.479);
   width: 25vw;
   height: 70vh;
   box-sizing: border-box;
