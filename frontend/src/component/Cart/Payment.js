@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef } from "react";
 import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData";
-import { Typography } from "@material-ui/core";
+import { Paper, Typography, Grid } from "@material-ui/core";
 import { useAlert } from "react-alert";
 import {
   CardNumberElement,
@@ -24,8 +24,8 @@ const Payment = ({ history }) => {
 
   const dispatch = useDispatch();
   const alert = useAlert();
-  const stripe = useStripe();
-  const elements = useElements();
+  // const stripe = useStripe();
+  // const elements = useElements();
   const payBtn = useRef(null);
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
@@ -50,61 +50,65 @@ const Payment = ({ history }) => {
 
     payBtn.current.disabled = true;
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        "/api/v1/payment/process",
-        paymentData,
-        config
-      );
+    // try {
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+    // const { data } = await axios.post(
+    //   "/api/v1/payment/process",
+    //   paymentData,
+    //   config
+    // );
 
-      const client_secret = data.client_secret;
+    // const client_secret = data.client_secret;
 
-      if (!stripe || !elements) return;
+    // if (!stripe || !elements) return;
 
-      const result = await stripe.confirmCardPayment(client_secret, {
-        payment_method: {
-          card: elements.getElement(CardNumberElement),
-          billing_details: {
-            name: user.name,
-            email: user.email,
-            address: {
-              line1: shippingInfo.address,
-              city: shippingInfo.city,
-              state: shippingInfo.state,
-              postal_code: shippingInfo.pinCode,
-              country: shippingInfo.country,
-            },
-          },
-        },
-      });
+    // const result = await stripe.confirmCardPayment(client_secret, {
+    //   payment_method: {
+    //     card: elements.getElement(CardNumberElement),
+    //     billing_details: {
+    //       name: user.name,
+    //       email: user.email,
+    //       address: {
+    //         line1: shippingInfo.address,
+    //         city: shippingInfo.city,
+    //         state: shippingInfo.state,
+    //         postal_code: shippingInfo.pinCode,
+    //         country: shippingInfo.country,
+    //       },
+    //     },
+    //   },
+    // });
 
-      if (result.error) {
-        payBtn.current.disabled = false;
+    // if (result.error) {
+    //   payBtn.current.disabled = false;
 
-        alert.error(result.error.message);
-      } else {
-        if (result.paymentIntent.status === "succeeded") {
-          order.paymentInfo = {
-            id: result.paymentIntent.id,
-            status: result.paymentIntent.status,
-          };
+    //   alert.error(result.error.message);
+    // } else {
+    // if (result.paymentIntent.status === "succeeded") {
+    const n = Math.random();
 
-          dispatch(createOrder(order));
+    debugger;
 
-          history.push("/success");
-        } else {
-          alert.error("There's some issue while processing payment ");
-        }
-      }
-    } catch (error) {
-      payBtn.current.disabled = false;
-      alert.error(error.response.data.message);
-    }
+    order.paymentInfo = {
+      id: Math.random(),
+      status: "succeeded",
+    };
+
+    dispatch(createOrder(order));
+
+    history.push("/success");
+    // } else {
+    //   alert.error("There's some issue while processing payment ");
+    // }
+    // }
+    // } catch (error) {
+    //   payBtn.current.disabled = false;
+    //   alert.error(error.response.data.message);
+    // }
   };
 
   useEffect(() => {
@@ -118,8 +122,51 @@ const Payment = ({ history }) => {
     <Fragment>
       <MetaData title="Payment" />
       <CheckoutSteps activeStep={2} />
-      <div className="paymentContainer">
+
+      {/* <div className="paymentContainer"> */}
+<div style={{display:"flex", justifyContent:"center"}}>
+      <Paper
+        variant="elevation"
+        elevation={8}
+        style={{ margin: "30px", padding: "30px", width: "500px" }}
+      >
+        <Grid container spacing={2} justifyContent="space-between">
+          <Grid item lg={12}>
+            {" "}
+            <Typography
+              variant="h6"
+              color="primary"
+              style={{ fontWeight: 600, textAlign: "left" }}
+            >
+              Place Order
+            </Typography>
+          </Grid>
+
+          <Grid item lg={12}>
+            <Typography
+              variant="h6"
+              color="primary"
+              style={{
+                fontSize: "15px",
+                textAlign: "left",
+                marginBottom: "100px",
+              }}
+            >
+              Payment is on Cash On Delivery(COD)
+            </Typography>
+          </Grid>
+        </Grid>
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+          <input
+            type="submit"
+            value={`Pay - Rs.${orderInfo && orderInfo.totalPrice}`}
+            ref={payBtn}
+            className="paymentFormBtn"
+          />
+        </form>
+      </Paper>
+</div>
+      {/* <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
           <Typography>Card Info</Typography>
           <div>
             <CreditCardIcon />
@@ -140,8 +187,8 @@ const Payment = ({ history }) => {
             ref={payBtn}
             className="paymentFormBtn"
           />
-        </form>
-      </div>
+        </form> */}
+      {/* </div> */}
     </Fragment>
   );
 };
